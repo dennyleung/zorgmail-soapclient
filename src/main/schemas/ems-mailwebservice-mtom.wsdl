@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.enovation.nl/ems/mailwebservice" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://www.enovation.nl/ems/mailwebservice" targetNamespace="http://www.enovation.nl/ems/mailwebservice">
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xmime="http://www.w3.org/2005/05/xmlmime" elementFormDefault="qualified" targetNamespace="http://www.enovation.nl/ems/mailwebservice" xmlns:tns="http://www.enovation.nl/ems/mailwebservice">
+
+    <element name="SendRequest" type="tns:SendMessage" xmlns="http://www.w3.org/2001/XMLSchema"/>
+    
+    <element name="SendRfc822Request" type="tns:SendRfc822Message" xmlns="http://www.w3.org/2001/XMLSchema"/>
+    
+	<element name="DeleteRequest" type="tns:UniqueIdRequest" xmlns="http://www.w3.org/2001/XMLSchema"/>
+  
+    <element name="RetrieveRequest" type="tns:UniqueIdRequest" xmlns="http://www.w3.org/2001/XMLSchema"/>
+        
+	<element name="RetrieveRfc822Request" type="tns:UniqueIdRequest" xmlns="http://www.w3.org/2001/XMLSchema"/>
+	
+    <element name="RetrieveResponse" type="tns:Message" xmlns="http://www.w3.org/2001/XMLSchema"/>
+    
+    <element name="RetrieveRfc822Response" type="tns:Message" xmlns="http://www.w3.org/2001/XMLSchema"/>
+   
+	<element name="ListRequest" type="tns:AccountIdRequest" xmlns="http://www.w3.org/2001/XMLSchema"/>
+
+    <element name="ListResponse" type="tns:ListResponse" xmlns="http://www.w3.org/2001/XMLSchema"/>
+
+	<element name="StatRequest" type="tns:AccountIdRequest" xmlns="http://www.w3.org/2001/XMLSchema"/>
+
+    <element name="StatResponse" type="tns:StatResponse" xmlns="http://www.w3.org/2001/XMLSchema"/>    
+    
+    <element name="UploadCertificateRequest" type="tns:UploadCertificate" xmlns="http://www.w3.org/2001/XMLSchema"/>
+    
+    <complexType name="SendMessage" xmlns="http://www.w3.org/2001/XMLSchema">
+        	<sequence xmlns="http://www.w3.org/2001/XMLSchema">
+        		<element name="messageId" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+      			<element name="sender" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+      			<element name="recipient" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+      			<element name="subject" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+      			<element name="contentType" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+            	<element name="content" type="base64Binary" xmime:expectedContentTypes="*/*" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xmime="http://www.w3.org/2005/05/xmlmime"/>
+        	</sequence>
+   	</complexType>
+   	
+    <complexType name="SendRfc822Message" xmlns="http://www.w3.org/2001/XMLSchema">
+        	<sequence xmlns="http://www.w3.org/2001/XMLSchema">
+      			<element name="sender" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+      			<element name="recipient" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+            	<element name="content" type="base64Binary" xmime:expectedContentTypes="*/*" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xmime="http://www.w3.org/2005/05/xmlmime"/>
+        	</sequence>
+   	</complexType>
+   	
+    <complexType name="Message" xmlns="http://www.w3.org/2001/XMLSchema">
+    	<sequence xmlns="http://www.w3.org/2001/XMLSchema">
+      		<element name="messageId" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+      		<element name="sourceAccountId" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+      		<element name="sourceAddress" nillable="true" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+      		<element name="receiveTimestamp" type="dateTime" xmlns="http://www.w3.org/2001/XMLSchema"/>
+      		<element name="headerMessageId" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+      		<element name="headerSubject" nillable="true" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+      		<element name="headerFrom" nillable="true" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+      		<element name="headerTo" nillable="true" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+      		<element name="documentFormat" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+      		<element name="documentType" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+      		<element name="documentCount" type="int" xmlns="http://www.w3.org/2001/XMLSchema"/>
+			<element name="documentItemCount" type="int" xmlns="http://www.w3.org/2001/XMLSchema"/>
+			<element name="documentId" nillable="true" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+			<element name="documentTimestamp" nillable="true" type="dateTime" xmlns="http://www.w3.org/2001/XMLSchema"/>
+			<element name="documentSender" nillable="true" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+			<element name="documentRecipient" nillable="true" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+			<element name="documentSubject" nillable="true" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+      		<element name="documentTypeVersion" nillable="true" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+      		<element name="documentSubType" nillable="true" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+      		<element name="contentType" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+      		<element name="content" type="base64Binary" xmime:expectedContentTypes="*/*" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xmime="http://www.w3.org/2005/05/xmlmime"/>
+    	</sequence>
+  	</complexType>
+  	
+  	<complexType name="UniqueIdRequest" xmlns="http://www.w3.org/2001/XMLSchema">
+    	<sequence xmlns="http://www.w3.org/2001/XMLSchema">
+    		<element name="uniqueId" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+    	</sequence>
+  	</complexType>
+  	
+  	<complexType name="AccountIdRequest" xmlns="http://www.w3.org/2001/XMLSchema">
+    	<sequence xmlns="http://www.w3.org/2001/XMLSchema">
+    		<element name="accountId" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+    	</sequence>
+  	</complexType>  	
+  	
+  	<complexType name="ListResponse" xmlns="http://www.w3.org/2001/XMLSchema">
+    	<sequence xmlns="http://www.w3.org/2001/XMLSchema">
+      		<element maxOccurs="unbounded" minOccurs="0" name="uniqueIds" type="string" xmlns="http://www.w3.org/2001/XMLSchema"/>
+    	</sequence>
+  	</complexType>
+  	
+  	<complexType name="StatResponse" xmlns="http://www.w3.org/2001/XMLSchema">
+  		<sequence xmlns="http://www.w3.org/2001/XMLSchema">
+      		<element name="count" type="int" xmlns="http://www.w3.org/2001/XMLSchema"/>
+		</sequence>
+  	</complexType>  
+
+    <complexType name="UploadCertificate" xmlns="http://www.w3.org/2001/XMLSchema">
+        	<sequence xmlns="http://www.w3.org/2001/XMLSchema">
+            	<element name="certificate" type="base64Binary" xmime:expectedContentTypes="*/*" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xmime="http://www.w3.org/2005/05/xmlmime"/>
+        	</sequence>
+   	</complexType>
+   	
+</schema>
+  </wsdl:types>
+  <wsdl:message name="SendRfc822Request">
+    <wsdl:part element="tns:SendRfc822Request" name="SendRfc822Request">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListResponse">
+    <wsdl:part element="tns:ListResponse" name="ListResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListRequest">
+    <wsdl:part element="tns:ListRequest" name="ListRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UploadCertificateRequest">
+    <wsdl:part element="tns:UploadCertificateRequest" name="UploadCertificateRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RetrieveRfc822Response">
+    <wsdl:part element="tns:RetrieveRfc822Response" name="RetrieveRfc822Response">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RetrieveResponse">
+    <wsdl:part element="tns:RetrieveResponse" name="RetrieveResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RetrieveRequest">
+    <wsdl:part element="tns:RetrieveRequest" name="RetrieveRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="StatResponse">
+    <wsdl:part element="tns:StatResponse" name="StatResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RetrieveRfc822Request">
+    <wsdl:part element="tns:RetrieveRfc822Request" name="RetrieveRfc822Request">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteRequest">
+    <wsdl:part element="tns:DeleteRequest" name="DeleteRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SendRequest">
+    <wsdl:part element="tns:SendRequest" name="SendRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="StatRequest">
+    <wsdl:part element="tns:StatRequest" name="StatRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="MailService">
+    <wsdl:operation name="Send">
+      <wsdl:input message="tns:SendRequest" name="SendRequest">
+    </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Stat">
+      <wsdl:input message="tns:StatRequest" name="StatRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:StatResponse" name="StatResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendRfc822">
+      <wsdl:input message="tns:SendRfc822Request" name="SendRfc822Request">
+    </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Retrieve">
+      <wsdl:input message="tns:RetrieveRequest" name="RetrieveRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:RetrieveResponse" name="RetrieveResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadCertificate">
+      <wsdl:input message="tns:UploadCertificateRequest" name="UploadCertificateRequest">
+    </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveRfc822">
+      <wsdl:input message="tns:RetrieveRfc822Request" name="RetrieveRfc822Request">
+    </wsdl:input>
+      <wsdl:output message="tns:RetrieveRfc822Response" name="RetrieveRfc822Response">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteRequest" name="DeleteRequest">
+    </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="List">
+      <wsdl:input message="tns:ListRequest" name="ListRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ListResponse" name="ListResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MailServiceSoap12" type="tns:MailService">
+    <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Send">
+      <soap12:operation soapAction=""/>
+      <wsdl:input name="SendRequest">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Stat">
+      <soap12:operation soapAction=""/>
+      <wsdl:input name="StatRequest">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="StatResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendRfc822">
+      <soap12:operation soapAction=""/>
+      <wsdl:input name="SendRfc822Request">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Retrieve">
+      <soap12:operation soapAction=""/>
+      <wsdl:input name="RetrieveRequest">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="RetrieveResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadCertificate">
+      <soap12:operation soapAction=""/>
+      <wsdl:input name="UploadCertificateRequest">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveRfc822">
+      <soap12:operation soapAction=""/>
+      <wsdl:input name="RetrieveRfc822Request">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="RetrieveRfc822Response">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap12:operation soapAction=""/>
+      <wsdl:input name="DeleteRequest">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="List">
+      <soap12:operation soapAction=""/>
+      <wsdl:input name="ListRequest">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ListResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MailServiceService">
+    <wsdl:port binding="tns:MailServiceSoap12" name="MailServiceSoap12">
+      <soap12:address location="https://lms.lifeline.nl/mailwebservice/mtom/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
